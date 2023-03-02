@@ -1,0 +1,21 @@
+const express = require('express');
+
+const app = express();
+
+
+app.use(express.static('public'));
+app.get('/',(req,res)=>{
+  res.sendFile(__dirname+'/index.html');
+});
+
+app.post('/login',(req,res)=>{
+  res.send("Received your Data");
+  console.log(req);
+});
+
+app.listen(3001,(err)=>{
+  if(!err)
+    console.log('Server Running on ');
+  else
+    console.log(err);
+})

@@ -1,25 +1,26 @@
-const http=require('http')
-const fs=require('fs')
-const port=3000
+const express = require('express')
 
-const server=http.createServer(function(req,res){
-  res.writeHead(200, {'Content-Type' : 'text/html'})
-  fs.readFile('index.html',function(error){
-    if(error){
-      res.writeHead(404)
+const app = express()
+ 
+app.use(express.static("public"));
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html',function(err){
+    if(err){
+      console.log(err);
     }
     else{
-      res.write('hello')
+      console.log('recieved')
     }
-    res.end()
-  })
-  
-})
-server.listen(port,function(error){
-  if(error){
-    console.log('oops ')
-  }
-  else{
-    console.log('Connected to '+port)
-  }
-})
+  });
+});
+
+
+
+app.post('/login',(req,res)=>{
+  res.send('poda naari')
+});
+ 
+app.listen(3000, () => {
+  console.log('Example app listening on port 3000!')
+});
